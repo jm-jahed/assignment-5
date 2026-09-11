@@ -11,14 +11,14 @@ export default function YourStack({ stack, onRemove, onRemoveAll }) {
         </p>
       </div>
 
-      {/* Conditional Rendering: Empty state vs Selected items */}
+      {/* Conditional Rendering */}
       {count === 0 ? (
         <div className="border border-dashed border-gray-300 rounded-xl py-10 px-4 text-center text-xs text-gray-400 bg-gray-50/50">
           Your stack is empty.
         </div>
       ) : (
         <div className="space-y-3">
-          {/* Selected items (1-column stack list) */}
+          {/* Selected items*/}
           <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1">
             {stack.map((item) => (
               <div
@@ -39,7 +39,7 @@ export default function YourStack({ stack, onRemove, onRemoveAll }) {
                   </div>
                 </div>
 
-                {/* Individual Remove (✕) Button */}
+                {/* Individual Remove  Button */}
                 <button
                   onClick={() => onRemove(item.id)}
                   className="p-1 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"

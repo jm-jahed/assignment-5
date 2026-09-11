@@ -4,7 +4,7 @@ export default function Banner() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          {/* Left: Text Content */}
+          {/* Left Banner */}
           <div className="space-y-6 text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-tight">
               Build Your Ideal <br />
@@ -35,7 +35,7 @@ export default function Banner() {
             </div>
           </div>
 
-          {/* Right: Banner Visual */}
+          {/* Right Banner */}
           <div className="flex justify-center">
             <img
               src="/assets/banner-stack.png"

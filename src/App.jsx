@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Banner from './components/Banner';
 import TechnologyGrid from './components/TechnologyGrid';
 import YourStack from './components/YourStack';
+import Footer from './components/Footer';
 
 function App() {
   const [technologies, setTechnologies] = useState([]);
@@ -30,7 +31,7 @@ function App() {
       });
   }, []);
 
-  // Add to Stack with duplicate check and React-Toastify alerts
+  // Add to Stack with duplicate check 
   const handleAddToStack = (tech) => {
     const isAlreadyInStack = stack.some((item) => item.id === tech.id);
     if (isAlreadyInStack) {
@@ -48,7 +49,7 @@ function App() {
     });
   };
 
-  // Remove individual item with toast notification
+  // Remove individual item 
   const handleRemoveFromStack = (techId) => {
     const itemToRemove = stack.find((item) => item.id === techId);
     setStack((prev) => prev.filter((item) => item.id !== techId));
@@ -60,7 +61,7 @@ function App() {
     }
   };
 
-  // Remove all items with toast notification
+  // Remove all items
   const handleRemoveAll = () => {
     if (stack.length === 0) return;
     setStack([]);
@@ -71,7 +72,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-white text-gray-900 flex flex-col justify-between">
       {/* Toast Notification Container */}
       <ToastContainer
         position="top-right"
@@ -87,10 +88,10 @@ function App() {
       />
 
       <Navbar />
-      <main>
+      <main className="flex-1">
         <Banner />
 
-        {/* Technology + Your Stack Section */}
+        {/* Technology  */}
         <section id="technologies" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="mb-8 text-left">
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900">
@@ -129,6 +130,9 @@ function App() {
           )}
         </section>
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

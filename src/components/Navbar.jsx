@@ -7,7 +7,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Mobile Navbar: Left Hamburger, Center Logo, Right Sign In / Sign Up */}
+        {/* Mobile Navbar  */}
         <div className="flex md:hidden items-center justify-between h-16">
           {/* Left: Hamburger Icon */}
           <button
@@ -26,7 +26,7 @@ export default function Navbar() {
             )}
           </button>
 
-          {/* Center: Brand Logo + Name */}
+          {/* Center: Brand Logo  */}
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 flex items-center justify-center">
               <span className="text-white font-bold text-xs">DS</span>
@@ -45,9 +45,9 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Desktop Navbar: Left Logo, Center Links, Right Auth */}
+        {/* Desktop Navbar */}
         <div className="hidden md:flex items-center justify-between h-16">
-          {/* Left: Brand Logo + Name */}
+          {/* Left: Brand Logo  */}
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 flex items-center justify-center">
               <span className="text-white font-bold text-xs">DS</span>
@@ -55,7 +55,7 @@ export default function Navbar() {
             <span className="text-xl font-bold text-gray-900">Dev Stack</span>
           </div>
 
-          {/* Center: Nav Links */}
+          {/*  Nav Links */}
           <nav className="flex items-center space-x-6">
             <a href="#home" className="text-sm font-semibold text-pink-500">
               Home
