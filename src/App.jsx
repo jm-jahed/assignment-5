@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Banner from './components/Banner';
 import TechnologyGrid from './components/TechnologyGrid';
+import YourStack from './components/YourStack';
 
 function App() {
   const [technologies, setTechnologies] = useState([]);
+  const [stack, setStack] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,13 +27,33 @@ function App() {
       });
   }, []);
 
+  // Add to Stack with duplicate prevention
+  const handleAddToStack = (tech) => {
+    const isAlreadyInStack = stack.some((item) => item.id === tech.id);
+    if (isAlreadyInStack) {
+      alert(`${tech.name} is already in your stack!`);
+      return;
+    }
+    setStack((prev) => [...prev, tech]);
+  };
+
+  // Remove individual item by ID
+  const handleRemoveFromStack = (techId) => {
+    setStack((prev) => prev.filter((item) => item.id !== techId));
+  };
+
+  // Remove all items from stack
+  const handleRemoveAll = () => {
+    setStack([]);
+  };
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Navbar />
       <main>
         <Banner />
 
-        {/* Technology Section */}
+        {/* Technology + Your Stack Section */}
         <section id="technologies" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="mb-8 text-left">
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900">
@@ -42,18 +64,31 @@ function App() {
             </p>
           </div>
 
-          {/* Loading State or Full Technology Grid */}
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16 space-y-3">
               <span className="loading loading-spinner loading-lg text-purple-600"></span>
               <p className="text-sm text-gray-500">Loading technologies...</p>
             </div>
           ) : (
-            <TechnologyGrid
-              technologies={technologies}
-              isAddedChecker={() => false}
-              onToggleStack={(item) => console.log('Clicked:', item.name)}
-            />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Technology Cards Grid (8 cols on lg, 9 on xl) */}
+              <div className="lg:col-span-8 xl:col-span-9">
+                <TechnologyGrid
+                  technologies={technologies}
+                  isAddedChecker={(id) => stack.some((item) => item.id === id)}
+                  onToggleStack={handleAddToStack}
+                />
+              </div>
+
+              {/* Your Stack Sidebar (4 cols on lg, 3 on xl) */}
+              <div className="lg:col-span-4 xl:col-span-3">
+                <YourStack
+                  stack={stack}
+                  onRemove={handleRemoveFromStack}
+                  onRemoveAll={handleRemoveAll}
+                />
+              </div>
+            </div>
           )}
         </section>
       </main>
