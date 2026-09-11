@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Banner from './components/Banner';
-import TechnologyCard from './components/TechnologyCard';
+import TechnologyGrid from './components/TechnologyGrid';
 
 function App() {
   const [technologies, setTechnologies] = useState([]);
@@ -42,23 +42,18 @@ function App() {
             </p>
           </div>
 
-          {/* Loading State or Cards Preview */}
+          {/* Loading State or Full Technology Grid */}
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16 space-y-3">
               <span className="loading loading-spinner loading-lg text-purple-600"></span>
               <p className="text-sm text-gray-500">Loading technologies...</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {technologies.slice(0, 3).map((tech) => (
-                <TechnologyCard
-                  key={tech.id}
-                  tech={tech}
-                  isAdded={false}
-                  onToggleStack={(item) => console.log('Clicked:', item.name)}
-                />
-              ))}
-            </div>
+            <TechnologyGrid
+              technologies={technologies}
+              isAddedChecker={() => false}
+              onToggleStack={(item) => console.log('Clicked:', item.name)}
+            />
           )}
         </section>
       </main>
