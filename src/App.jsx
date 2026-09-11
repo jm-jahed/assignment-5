@@ -14,7 +14,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/technologies.json')
+    fetch(`${import.meta.env.BASE_URL}technologies.json`)
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch technologies');

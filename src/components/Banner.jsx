@@ -38,7 +38,7 @@ export default function Banner() {
           {/* Right Banner */}
           <div className="flex justify-center">
             <img
-              src="/assets/banner-stack.png"
+              src={`${import.meta.env.BASE_URL}assets/banner-stack.png`}
               alt="DevStack illustration"
               className="w-full max-w-md h-auto object-contain"
             />
