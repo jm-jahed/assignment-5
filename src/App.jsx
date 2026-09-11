@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Navbar from './components/Navbar';
 import Banner from './components/Banner';
 import TechnologyGrid from './components/TechnologyGrid';
@@ -27,28 +30,62 @@ function App() {
       });
   }, []);
 
-  // Add to Stack with duplicate prevention
+  // Add to Stack with duplicate check and React-Toastify alerts
   const handleAddToStack = (tech) => {
     const isAlreadyInStack = stack.some((item) => item.id === tech.id);
     if (isAlreadyInStack) {
-      alert(`${tech.name} is already in your stack!`);
+      toast.warning(`${tech.name} is already in your stack!`, {
+        position: 'top-right',
+        autoClose: 2500,
+      });
       return;
     }
+
     setStack((prev) => [...prev, tech]);
+    toast.success(`Added ${tech.name} to your stack!`, {
+      position: 'top-right',
+      autoClose: 2500,
+    });
   };
 
-  // Remove individual item by ID
+  // Remove individual item with toast notification
   const handleRemoveFromStack = (techId) => {
+    const itemToRemove = stack.find((item) => item.id === techId);
     setStack((prev) => prev.filter((item) => item.id !== techId));
+    if (itemToRemove) {
+      toast.info(`Removed ${itemToRemove.name} from your stack.`, {
+        position: 'top-right',
+        autoClose: 2000,
+      });
+    }
   };
 
-  // Remove all items from stack
+  // Remove all items with toast notification
   const handleRemoveAll = () => {
+    if (stack.length === 0) return;
     setStack([]);
+    toast.error('All technologies removed from your stack!', {
+      position: 'top-right',
+      autoClose: 2500,
+    });
   };
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
+      {/* Toast Notification Container */}
+      <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
       <Navbar />
       <main>
         <Banner />
@@ -71,7 +108,7 @@ function App() {
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              {/* Technology Cards Grid (8 cols on lg, 9 on xl) */}
+              {/* Technology Cards Grid */}
               <div className="lg:col-span-8 xl:col-span-9">
                 <TechnologyGrid
                   technologies={technologies}
@@ -80,7 +117,7 @@ function App() {
                 />
               </div>
 
-              {/* Your Stack Sidebar (4 cols on lg, 3 on xl) */}
+              {/* Your Stack Sidebar */}
               <div className="lg:col-span-4 xl:col-span-3">
                 <YourStack
                   stack={stack}
